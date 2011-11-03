@@ -58,7 +58,6 @@ function Slinky(){
 
         if(fn!==undefined && typeof fn == 'function') {
             try {
-								console.log(fn);
                 return fn.apply(this);
             } catch(e) {
                 test.assert(false, e);
