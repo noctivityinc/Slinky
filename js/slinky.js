@@ -7,8 +7,8 @@
  * @version 0.1.4
  */
 
-function Slinky(){
-
+function Slinky(options){
+	
 	var 
 	output = document.getElementById('output');
 	testArray = [],
@@ -32,6 +32,15 @@ function Slinky(){
 		
 		done: function() {
 			_run();
+		},
+		
+		safe: function(fn) {
+			 try {
+            fn.apply(this);
+        } catch(e) {
+            this.assert(false, e);
+						_run();
+        }
 		},
 		
 		assert: function( outcome, explaination, failDisplay) {
@@ -64,7 +73,7 @@ function Slinky(){
         if(val1==val2) {
             test.assert(true, explaination)
         } else {
-            test.assert(false, explaination + ' ('+val1+ ' != '+val2+')');
+            test.assert(false, explaination, [val1, val2]);
         }
     }
 	};
@@ -96,7 +105,7 @@ function Slinky(){
                 return fn.apply(this);
             } catch(e) {
                 test.assert(false, e);
-								this.done();
+								_run();
             }
         }
     };
@@ -105,11 +114,6 @@ function Slinky(){
         _test('Total Tests: '+(passed+failed)+', # Passed: '+passed+' # Failed: '+failed);
     }
 
-	// bind errors on page
-	window.onerror = function() {
-	  assert(false, arguments[0])
-	  return true;
-	}
 
 	return my;
 	
