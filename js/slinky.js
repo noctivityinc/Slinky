@@ -1,3 +1,12 @@
+/**
+ * Slinky
+ *
+ * @module slinky
+ * @copyright (c) 2011 Noctivity Inc
+ * @author Joshua Lippiner (jlippiner@noctivity.com)
+ * @version 0.1.4
+ */
+
 function Slinky(){
 
 	var 
@@ -13,18 +22,16 @@ function Slinky(){
 		},
 		
 		run: function() {
-			if(testArray.length>0) {
-				atest = testArray.shift();
-				_runTest(atest);
-			} else {
-				_showResults();
-			}
+			var d = currentTime;
+			var h2 = document.createElement('h2');
+      h2.appendChild( document.createTextNode('Test Run at '+d) );
+      output.appendChild(h2);
 			
-			return true;
+			_run();
 		},
 		
 		done: function() {
-			return this.run();
+			_run();
 		},
 		
 		assert: function( outcome, explaination, failDisplay) {
@@ -62,11 +69,22 @@ function Slinky(){
     }
 	};
 	
+	function _run() {
+		if(testArray.length>0) {
+			atest = testArray.shift();
+			_runTest(atest);
+		} else {
+			_showResults();
+		}
+		
+		return true;
+	};
+	
 	function _runTest(aTest) {
 			_test(aTest, function() {
 				eval(aTest);
 			})
-	}
+	};
 	
 	function _test(msg, fn) {
         var h3 = document.createElement('h3');

@@ -9,6 +9,22 @@ then run the next test function, etc etc.  It's REAL easy and gives you pretty o
 
 * Include slinky.js in your testing page
 * Add a div with id "output" on your testing page
+* Add the following STYLEs to the HEAD of your testing page
+
+	<style>
+	    .pass:before {
+	    content: 'PASS: ';
+	    color: blue;
+	    font-weight: bold;
+	    }
+
+	    .fail:before {
+	    content: 'FAIL: ';
+	    color: red;
+	    font-weight: bold;
+	    }
+	</style>
+
 * Encapsulate everything you want to test in functions
 * Add test.done(); at the complete event inside each function
 
