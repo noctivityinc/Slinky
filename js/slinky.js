@@ -4,7 +4,7 @@
  * @module slinky
  * @copyright (c) 2011 Noctivity Inc
  * @author Joshua Lippiner (jlippiner@noctivity.com)
- * @version 0.1.4
+ * @version 0.1.5
  */
 
 function Slinky(options){
@@ -38,16 +38,18 @@ function Slinky(options){
 			 try {
             fn.apply(this);
         } catch(e) {
-            this.assert(false, e);
+            this.assert('error', e);
 						_run();
         }
 		},
 		
-		assert: function( outcome, explaination, failDisplay) {
+		assert: function(outcome, explaination, failDisplay) {
+				var error = (outcome == 'error');
+				if(error) outcome = false;
         outcome ? passed++ : failed++;
 
         var li = document.createElement('li');
-        li.className = outcome ? 'pass' : 'fail';
+        li.className = error ? 'error' : (outcome ? 'pass' : 'fail');
         li.appendChild( document.createTextNode( explaination ) );
 
 				if(!outcome && failDisplay!==undefined) {
@@ -75,7 +77,17 @@ function Slinky(options){
         } else {
             test.assert(false, explaination, [val1, val2]);
         }
-    }
+    },
+
+		line: function(msg) {
+			var str = '========================================';
+			if (msg !== undefined) {
+				str = '====== ' + msg + ' ======';
+			};
+			var li = document.createElement('li');
+      li.appendChild( document.createTextNode(str) );
+			output.appendChild(li);
+		}
 	};
 	
 	function _run() {
@@ -104,7 +116,7 @@ function Slinky(options){
             try {
                 return fn.apply(this);
             } catch(e) {
-                test.assert(false, e);
+                this.assert('error', e);
 								_run();
             }
         }

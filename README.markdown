@@ -11,10 +11,12 @@ then run the next test function, etc etc.  It's REAL easy and gives you pretty o
 * Add a div with id "output" on your testing page
 * Add the following STYLEs to the HEAD of your testing page
 
+## Styles
+
 	<style>
 	    .pass:before {
 	    content: 'PASS: ';
-	    color: blue;
+	    color: green;
 	    font-weight: bold;
 	    }
 
@@ -23,13 +25,20 @@ then run the next test function, etc etc.  It's REAL easy and gives you pretty o
 	    color: red;
 	    font-weight: bold;
 	    }
+
+	    .error:before {
+	    content: 'FAIL: ';
+	    color: yellow;
+	    font-weight: bold;
+	    }
 	</style>
+	
 
 ## Usage 
 
 Instantiate a testing variable like sure:
 
-    var test = new Slinky();
+	var test = new Slinky();
 
 Create test functions for each group of code to test.  There are two simple *assert* methods available for your test:
 
@@ -55,11 +64,16 @@ For example:
 The purpose of test.done() is to trigger the next test case in the list.  Without it, the test suite will end at the completion of that 
 function.  This allows you to run an AJAX routine and issue test.done() in the callback to advance when it's complete.
 	
+If you want to visually break up the output, you can use a test.line() or test.line(msg) in your test cases:
+
+    test.line();					// =>  ==============================
+	test.line('Something')			// =>  ===== Something =====
+
 Next, set up your test cases:
  
     test.add('functionA()');			// yes, inside quotes like that!
-    test.add('functionB()');			
-    test.add('functionC()');			
+    test.add('functionB(123)');			
+    test.add('functionC('zyz',123)');		
 
 Finally, run your tests:
 
@@ -78,5 +92,5 @@ To handle AJAX callback error catching simply wrap your callback in a test.safe(
 		})
 	})
 	
-* That's it for now! *
+## That's it for now! 
 
