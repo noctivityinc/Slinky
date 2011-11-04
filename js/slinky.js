@@ -4,7 +4,7 @@
  * @module slinky
  * @copyright (c) 2011 Noctivity Inc
  * @author Joshua Lippiner (jlippiner@noctivity.com)
- * @version 0.1.5
+ * @version 0.1.6
  */
 
 function Slinky(options){
@@ -82,7 +82,7 @@ function Slinky(options){
 		line: function(msg) {
 			var str = '========================================';
 			if (msg !== undefined) {
-				str = '====== ' + msg + ' ======';
+				str = '======' + msg + '======';
 			};
 			var li = document.createElement('li');
       li.appendChild( document.createTextNode(str) );
@@ -116,7 +116,7 @@ function Slinky(options){
             try {
                 return fn.apply(this);
             } catch(e) {
-                this.assert('error', e);
+                my.assert('error', e);
 								_run();
             }
         }

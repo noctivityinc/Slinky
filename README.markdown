@@ -19,7 +19,7 @@ then run the next test function, etc etc.  It's REAL easy and gives you pretty o
 	    color: green;
 	    font-weight: bold;
 	    }
-
+ 
 	    .fail:before {
 	    content: 'FAIL: ';
 	    color: red;
@@ -27,12 +27,11 @@ then run the next test function, etc etc.  It's REAL easy and gives you pretty o
 	    }
 
 	    .error:before {
-	    content: 'FAIL: ';
-	    color: yellow;
+	    content: 'ERROR: ';
+	    color: #AF7817;
 	    font-weight: bold;
 	    }
 	</style>
-	
 
 ## Usage 
 
